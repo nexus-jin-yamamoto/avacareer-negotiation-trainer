@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>稽古する｜交渉道場</title>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Zen+Kurenaido&display=swap" rel="stylesheet">
+<style>
+  :root{--washi:#f4f6f3;--paper:#fdfdfb;--ai:#1e3d5f;--ai-deep:#132c47;--sumi:#23282e;--shu:#c73e2c;--mut:#75818d;--rule:#dde3dd}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Zen Kaku Gothic New',sans-serif;background:var(--washi);color:var(--sumi);font-feature-settings:"palt";min-height:100vh}
+  header{max-width:860px;margin:0 auto;padding:24px 28px;display:flex;justify-content:space-between;align-items:baseline}
+  .logo{font-family:'Shippori Mincho',serif;font-weight:800;font-size:18px;letter-spacing:.14em;color:var(--ai)}
+  .logo a{text-decoration:none;color:inherit}
+  .logo small{font-family:'Zen Kaku Gothic New';font-weight:500;font-size:10.5px;color:var(--mut);letter-spacing:.22em;margin-left:12px}
+  header .reg{font-size:12px;font-weight:700;color:var(--ai);text-decoration:none;letter-spacing:.14em;border-bottom:1px solid var(--ai);padding-bottom:3px}
+  main{max-width:720px;margin:0 auto;padding:24px 28px 90px}
+  h1{font-family:'Shippori Mincho',serif;font-size:23px;font-weight:800;letter-spacing:.1em;color:var(--ai-deep);text-align:center}
+  .sub{text-align:center;font-size:13px;color:var(--mut);margin:12px 0 26px;letter-spacing:.06em;line-height:2}
+  /* 帯選択 */
+  #belts{display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule)}
+  .obi{background:var(--paper);padding:22px 24px;display:grid;grid-template-columns:64px 1fr auto;gap:20px;align-items:center;cursor:pointer;transition:background .15s}
+  .obi:hover{background:#fff}
+  .belt{height:12px;border-radius:1px}
+  .b1{background:#eceee9;border:1px solid #d8dcd4}
+  .b2{background:#8a5a33}
+  .b3{background:#23282e}
+  .obi h3{font-family:'Shippori Mincho',serif;font-size:15.5px;font-weight:800}
+  .obi h3 span{font-size:11.5px;color:var(--mut);font-weight:600;margin-left:8px}
+  .obi .go{font-size:12px;color:var(--shu);letter-spacing:.2em;font-weight:700}
+  /* 稽古 */
+  #dojo{display:none}
+  .script{background:var(--paper);border:1px solid #e4e7e0;border-radius:4px;padding:34px 30px;position:relative;box-shadow:0 18px 40px rgba(30,61,95,.07)}
+  .script::before{content:attr(data-title);position:absolute;top:-11px;left:26px;background:var(--washi);padding:0 12px;font-size:11px;letter-spacing:.2em;color:var(--mut)}
+  .line{display:grid;grid-template-columns:60px 1fr;gap:16px;padding:14px 0;border-bottom:1px dashed #e7e9e3}
+  .line .who{font-family:'Shippori Mincho',serif;font-size:12.5px;font-weight:600;color:var(--mut);padding-top:3px}
+  .line.me .who{color:var(--ai)}
+  .line .say{font-size:14px;line-height:2.1;color:#333a41}
+  .aka{font-family:'Zen Kurenaido',cursive;font-size:13.5px;color:var(--shu);grid-column:2;line-height:1.8}
+  .opts{margin-top:20px;display:grid;gap:10px}
+  .opt{background:#fff;border:1px solid var(--rule);border-left:3px solid var(--ai);border-radius:3px;padding:15px 18px;font-size:13.5px;line-height:1.9;cursor:pointer;text-align:left;font-family:inherit;color:var(--sumi);transition:.15s}
+  .opt:hover{border-left-color:var(--shu);background:#fdfdfb;transform:translateX(3px)}
+  /* 結果 */
+  #fin{display:none;margin-top:26px;background:var(--paper);border:1px solid #e4e7e0;border-radius:4px;padding:36px 32px;position:relative;text-align:center}
+  .stamp{width:104px;height:104px;border:2.5px solid var(--shu);border-radius:50%;color:var(--shu);display:grid;place-content:center;margin:0 auto 20px;font-family:'Shippori Mincho',serif;transform:rotate(-6deg)}
+  .stamp b{font-size:28px;font-weight:800}
+  .stamp span{font-size:9px;letter-spacing:.26em;margin-top:4px}
+  #fin h2{font-family:'Shippori Mincho',serif;font-size:19px;font-weight:800;letter-spacing:.08em;color:var(--ai-deep)}
+  #fin .crit{margin:16px auto 0;max-width:440px;text-align:left;font-size:13.5px;line-height:2.2;color:#4a525a}
+  #fin .crit b{color:var(--shu)}
+  .cta{margin-top:28px;background:var(--ai-deep);border-radius:4px;padding:30px 26px;color:#f2f5f1}
+  .cta h3{font-family:'Shippori Mincho',serif;font-size:17px;letter-spacing:.08em;line-height:1.9}
+  .cta p{font-size:12.5px;color:#aebcc8;line-height:2.1;margin:10px 0 18px}
+  .cta a{display:inline-block;background:var(--paper);color:var(--ai-deep);text-decoration:none;font-weight:700;font-size:14px;letter-spacing:.16em;padding:15px 34px;border-radius:3px}
+  .again{display:block;text-align:center;margin-top:18px;color:var(--mut);font-size:12px;cursor:pointer;text-decoration:underline}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo"><a href="/">交渉道場</a><small>AVACAREER LAB</small></div>
+  <a class="reg" href="/register/">無料登録</a>
+</header>
+<main>
+  <h1>本日の稽古</h1>
+  <p class="sub">相手を選んで稽古を始めてください。<br>あなたの一手ごとに、AI師範が朱を入れます。</p>
+
+  <div id="belts">
+    <div class="obi" onclick="start(0)"><div class="belt b1"></div><div><h3>白帯<span>ものわかりの良い人事</span></h3></div><div class="go">稽古する →</div></div>
+    <div class="obi" onclick="start(1)"><div class="belt b2"></div><div><h3>茶帯<span>慎重な人事部長</span></h3></div><div class="go">稽古する →</div></div>
+    <div class="obi" onclick="start(2)"><div class="belt b3"></div><div><h3>黒帯<span>予算を守り抜くCFO</span></h3></div><div class="go">稽古する →</div></div>
+  </div>
+
+  <div id="dojo">
+    <div class="script" id="script" data-title=""></div>
+    <div class="opts" id="opts"></div>
+  </div>
+
+  <div id="fin">
+    <div class="stamp"><b id="dan"></b><span>交渉道場認定</span></div>
+    <h2 id="fh"></h2>
+    <div class="crit" id="crit"></div>
+    <div class="cta">
+      <h3>稽古の成果は、本番の年収で受け取る。</h3>
+      <p>AVACAREERに登録すると、この稽古記録をもとにAIアバターが企業への条件交渉を代行します。</p>
+      <a href="/register/">無料登録して本番に進む</a>
+    </div>
+    <span class="again" onclick="location.reload()">もう一度稽古する</span>
+  </div>
+</main>
+<script>
+const NAMES=["人事","人事部長","CFO"];
+const OPEN=[
+ "ご希望の年収があれば、遠慮なくお聞かせください。",
+ "率直に申し上げて、ご希望の五五〇万円は当社の想定を少し超えています。四八〇万円ではいかがでしょうか。",
+ "予算の都合上、四六〇万円が上限です。これ以上は難しいとお考えください。"];
+const ROUNDS=[
+ {opts:[
+   ["お任せします。皆さんと同じで大丈夫です。",0,"任せてはいけない。希望額はまず自分の口で"],
+   ["希望は五五〇万円です。理由もあわせてご説明できます。",2,"良い。額と根拠をセットで出せている"],
+   ["最低でも六〇〇万は欲しいですね。",1,"額のみの主張は強気に見えて弱い。根拠を"]]},
+ {opts:[
+   ["では四八〇万円で結構です。",0,"即答での譲歩は早い。一呼吸置いてよい"],
+   ["前職で新規売上を年間三、二〇〇万円伸ばした実績があります。その価値を踏まえ五三〇万円でご検討いただけませんか。",2,"数字の根拠と歩み寄り額。手本のような一手"],
+   ["他社からはもっと高い提示を受けています。",1,"他社カードは効くが使いどころを誤ると心証を損なう"]]},
+ {opts:[
+   ["わかりました。その条件で構いません。",0,"最後まで粘れたはず。条件全体を見る癖を"],
+   ["基本給が難しければ、入社後半年での見直し時期を設けることは可能でしょうか。",2,"見事。金額以外の変数で着地させる黒帯の一手"],
+   ["それでは今回のお話は見送らせてください。",1,"引く選択も一手。ただし代替案を出してからでも遅くない"]]}
+];
+let lv=0,score=0,step=0;
+function start(l){lv=l;score=0;step=0;
+  document.getElementById('belts').style.display='none';
+  document.getElementById('dojo').style.display='block';
+  const s=document.getElementById('script');
+  s.dataset.title="稽古記録 — 想定相手："+NAMES[lv];
+  s.innerHTML='<div class="line"><div class="who">'+NAMES[lv]+'</div><div class="say">'+OPEN[lv]+'</div></div>';
+  ask();}
+function ask(){
+  const o=document.getElementById('opts');o.innerHTML='';
+  ROUNDS[step].opts.forEach(op=>{
+    const b=document.createElement('button');b.className='opt';b.textContent=op[0];
+    b.onclick=()=>pick(op);o.appendChild(b);});}
+function pick(op){
+  score+=op[1];
+  const s=document.getElementById('script');
+  s.innerHTML+='<div class="line me"><div class="who">あなた</div><div class="say">'+op[0]+'</div><div class="aka">'+op[2]+'</div></div>';
+  step++;
+  if(step<ROUNDS.length){
+    const rep=["なるほど、承知しました。続けましょう。","……ふむ。もう少し詳しく伺えますか。","一度、社内で持ち帰らせてください。"][step-1];
+    s.innerHTML+='<div class="line"><div class="who">'+NAMES[lv]+'</div><div class="say">'+rep+'</div></div>';
+    ask();
+  }else{fin();}
+}
+function fin(){
+  document.getElementById('opts').innerHTML='';
+  const f=document.getElementById('fin');f.style.display='block';
+  const total=score+lv; // 0-8
+  const dan=total>=7?"三段":total>=5?"二段":total>=3?"初段":"入門";
+  document.getElementById('dan').textContent=dan;
+  document.getElementById('fh').textContent="本日の稽古、"+dan+"と認定します。";
+  document.getElementById('crit').innerHTML=
+   "<b>効いた一手：</b>"+(score>=4?"数字での根拠提示。感情でなく事実で交渉できています。":"希望額を口に出せたこと。まずはそこからです。")+"<br>"+
+   "<b>次の課題：</b>"+(score>=4?"金額以外の条件（見直し時期・役職・裁量）を交渉材料に加えること。":"譲歩を急がないこと。沈黙は負けではありません。");
+  f.scrollIntoView({behavior:'smooth'});
+}
+</script>
+</body>
+</html>

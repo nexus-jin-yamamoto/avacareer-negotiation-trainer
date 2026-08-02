@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>交渉道場｜給与交渉は、稽古で上手くなる。</title>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Zen+Kurenaido&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --washi:#f4f6f3; --paper:#fdfdfb; --ai:#1e3d5f; --ai-deep:#132c47;
+    --sumi:#23282e; --shu:#c73e2c; --mut:#75818d; --rule:#dde3dd;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Zen Kaku Gothic New',sans-serif;background:var(--washi);color:var(--sumi);font-feature-settings:"palt"}
+
+  header{max-width:1140px;margin:0 auto;padding:26px 36px;display:flex;justify-content:space-between;align-items:baseline}
+  .logo{font-family:'Shippori Mincho',serif;font-weight:800;font-size:19px;letter-spacing:.14em;color:var(--ai)}
+  .logo small{font-family:'Zen Kaku Gothic New';font-weight:500;font-size:11px;color:var(--mut);letter-spacing:.22em;margin-left:14px}
+  header a{font-size:12.5px;font-weight:700;color:var(--ai);text-decoration:none;letter-spacing:.14em;border-bottom:1px solid var(--ai);padding-bottom:3px}
+
+  /* ---------- hero ---------- */
+  .hero{max-width:1140px;margin:0 auto;padding:40px 36px 0;display:grid;grid-template-columns:auto 1fr;gap:64px}
+  .tate{writing-mode:vertical-rl;text-orientation:mixed;font-family:'Shippori Mincho',serif;font-weight:800;font-size:clamp(40px,5.4vw,64px);line-height:1.6;letter-spacing:.18em;color:var(--ai-deep);height:clamp(340px,44vw,480px)}
+  .tate b{color:var(--shu);font-weight:800}
+  .hero-right{padding-top:14px;max-width:560px}
+  .eyebrow{font-size:12px;letter-spacing:.34em;color:var(--mut);margin-bottom:22px}
+  .eyebrow i{font-style:normal;color:var(--shu);margin-right:10px}
+  .hero-right p{font-size:15px;line-height:2.3;color:#3d454d}
+  .hero-right p+p{margin-top:14px}
+  .hero-right em{font-style:normal;background:linear-gradient(transparent 68%,#f3d9d3 68%)}
+  .start{margin-top:36px;display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+  .start a{display:inline-block;background:var(--ai);color:#fff;text-decoration:none;font-weight:700;font-size:14.5px;letter-spacing:.24em;padding:18px 20px 18px 26px;border-radius:3px;transition:background .2s}
+  .start a:hover{background:var(--ai-deep)}
+  .start span{font-size:12px;color:var(--mut);letter-spacing:.06em;line-height:1.9}
+
+  /* ---------- 稽古台本（朱入れ） ---------- */
+  .keiko{max-width:1140px;margin:88px auto 0;padding:0 36px;display:grid;grid-template-columns:300px 1fr;gap:56px;align-items:start}
+  .keiko-side h2{font-family:'Shippori Mincho',serif;font-size:24px;font-weight:800;letter-spacing:.1em;color:var(--ai-deep);line-height:1.9}
+  .keiko-side .bar{width:44px;height:3px;background:var(--shu);margin:20px 0 22px}
+  .keiko-side p{font-size:13.5px;line-height:2.3;color:#4a525a}
+  .keiko-side dl{margin-top:26px;border-top:1px solid var(--rule)}
+  .keiko-side .kv{display:flex;justify-content:space-between;align-items:baseline;padding:13px 2px;border-bottom:1px solid var(--rule)}
+  .keiko-side dt{font-size:12px;color:var(--mut);letter-spacing:.1em}
+  .keiko-side dd{font-family:'Shippori Mincho',serif;font-size:15px;font-weight:600;color:var(--sumi)}
+
+  .script{background:var(--paper);border:1px solid #e4e7e0;border-radius:4px;padding:44px 96px 44px 48px;position:relative;box-shadow:0 1px 0 #e4e7e0,0 18px 40px rgba(30,61,95,.07)}
+  .script::before{content:"稽古記録 — 想定相手：慎重な人事部長";position:absolute;top:-11px;left:32px;background:var(--washi);padding:0 12px;font-size:11.5px;letter-spacing:.2em;color:var(--mut)}
+  .line{display:grid;grid-template-columns:64px 1fr;gap:18px;padding:16px 0;border-bottom:1px dashed #e7e9e3;position:relative}
+  .line:last-of-type{border-bottom:none}
+  .line .who{font-family:'Shippori Mincho',serif;font-size:13px;font-weight:600;color:var(--mut);letter-spacing:.1em;padding-top:3px}
+  .line.me .who{color:var(--ai)}
+  .line .say{font-size:14px;line-height:2.15;color:#333a41}
+  .say .ok{border-bottom:2px solid var(--shu)}
+  .say .maru{position:relative;padding:0 2px}
+  .say .maru::after{content:"";position:absolute;inset:-4px -6px;border:1.6px solid var(--shu);border-radius:50%;opacity:.85;transform:rotate(-2deg)}
+  .aka{position:absolute;right:-84px;width:120px;font-family:'Zen Kurenaido',cursive;font-size:13.5px;line-height:1.7;color:var(--shu);transform:rotate(-3deg)}
+  .aka::before{content:"";position:absolute;left:-26px;top:12px;width:22px;border-top:1.4px solid var(--shu);transform:rotate(14deg)}
+  .aka.a2{transform:rotate(2deg)}
+  .stamp{position:absolute;right:34px;bottom:30px;width:96px;height:96px;border:2.5px solid var(--shu);border-radius:50%;color:var(--shu);display:grid;place-content:center;text-align:center;font-family:'Shippori Mincho',serif;transform:rotate(-8deg);opacity:.9}
+  .stamp b{font-size:26px;font-weight:800;letter-spacing:.1em;line-height:1.2}
+  .stamp span{font-size:9.5px;letter-spacing:.28em;margin-top:4px}
+
+  /* ---------- 段位 ---------- */
+  .ranks{max-width:1140px;margin:96px auto 0;padding:0 36px}
+  .ranks h2{font-family:'Shippori Mincho',serif;font-size:22px;font-weight:800;letter-spacing:.12em;color:var(--ai-deep);text-align:center}
+  .ranks .note{text-align:center;font-size:12.5px;color:var(--mut);margin-top:12px;letter-spacing:.06em}
+  .obi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:34px}
+  .obi{background:var(--paper);padding:30px 28px 34px}
+  .obi .belt{height:14px;margin-bottom:22px;position:relative}
+  .obi .belt::after{content:"";position:absolute;left:38%;top:-3px;bottom:-3px;width:10px;background:inherit;filter:brightness(.92);border-radius:1px}
+  .obi.b1 .belt{background:#eceee9;border:1px solid #d8dcd4}
+  .obi.b2 .belt{background:#8a5a33}
+  .obi.b3 .belt{background:#23282e}
+  .obi h3{font-family:'Shippori Mincho',serif;font-size:17px;font-weight:800;letter-spacing:.08em}
+  .obi h3 span{font-size:12px;color:var(--mut);font-weight:600;margin-left:10px;letter-spacing:.12em}
+  .obi p{font-size:13px;line-height:2.1;color:#4a525a;margin-top:10px}
+
+  /* ---------- CTA ---------- */
+  .cta{margin:104px 0 0;background:var(--ai-deep);color:#f2f5f1}
+  .cta-in{max-width:1140px;margin:0 auto;padding:84px 36px;display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center}
+  .cta h2{font-family:'Shippori Mincho',serif;font-size:clamp(24px,3.4vw,34px);font-weight:800;letter-spacing:.1em;line-height:1.9}
+  .cta h2 b{color:#e88b7a}
+  .cta p{margin-top:18px;font-size:14px;line-height:2.3;color:#aebcc8;max-width:520px}
+  .cta-act{text-align:center}
+  .cta-act a{display:inline-block;background:var(--paper);color:var(--ai-deep);text-decoration:none;font-weight:700;font-size:15px;letter-spacing:.2em;padding:20px 42px;border-radius:3px;transition:.2s}
+  .cta-act a:hover{background:#fff;transform:translateY(-2px)}
+  .cta-act small{display:block;margin-top:14px;font-size:11.5px;color:#8fa0af;letter-spacing:.08em;line-height:1.9}
+  footer{background:var(--ai-deep);border-top:1px solid #21456b;text-align:center;padding:24px;color:#6d8298;font-size:11px;letter-spacing:.18em}
+
+  @media(max-width:960px){
+    .hero{grid-template-columns:1fr;gap:36px}
+    .tate{writing-mode:horizontal-tb;height:auto;font-size:clamp(30px,7.4vw,44px);line-height:1.6;letter-spacing:.08em}
+    .keiko{grid-template-columns:1fr}
+    .script{padding:38px 28px 100px}
+    .aka{position:static;width:auto;transform:none;margin-top:6px;grid-column:2}
+    .aka::before{display:none}
+    .obi-row{grid-template-columns:1fr}
+    .cta-in{grid-template-columns:1fr;text-align:left}
+    .cta-act{text-align:left}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">交渉道場<small>AVACAREER LAB</small></div>
+  <a href="#cta">無料登録</a>
+</header>
+
+<section class="hero">
+  <h1 class="tate">給与交渉は、<br><b>稽古</b>で上手くなる。</h1>
+  <div class="hero-right">
+    <div class="eyebrow"><i>—</i>AIを相手にした、給与交渉のけいこ場</div>
+    <p>年収の話になると、つい「お任せします」と言ってしまう。それは度胸の問題ではなく、単に<em>場数の問題</em>です。</p>
+    <p>この道場では、実際の面接データを学んだAIの人事担当を相手に、希望額の切り出し方、渋られたときの返し、沈黙の使い方までを何度でも稽古できます。失敗しても、減るものは何もありません。</p>
+    <div class="start">
+      <a href="app.html">稽古をはじめる</a>
+      <span>一回の稽古 約五分<br>入門無料・登録不要</span>
+    </div>
+  </div>
+</section>
+
+<section class="keiko">
+  <div class="keiko-side">
+    <h2>稽古のあとには、<br>師範の朱が入る。</h2>
+    <div class="bar"></div>
+    <p>稽古を終えると、あなたの発言ひとつひとつにAI師範が朱筆で添削を入れます。良かった一手には丸を、惜しい一言には言い換えを。次の稽古で、同じ場面に強くなります。</p>
+    <dl>
+      <div class="kv"><dt>今回の評価</dt><dd>二段</dd></div>
+      <div class="kv"><dt>効いた一手</dt><dd>数字での根拠提示</dd></div>
+      <div class="kv"><dt>次の課題</dt><dd>即答を急がない</dd></div>
+    </dl>
+  </div>
+
+  <div class="script">
+    <div class="line">
+      <div class="who">人事部長</div>
+      <div class="say">率直に申し上げて、ご希望の五五〇万円は当社の想定を少し超えています。四八〇万円ではいかがでしょうか。</div>
+    </div>
+    <div class="line me">
+      <div class="who">あなた</div>
+      <div class="say">ご提示ありがとうございます。<span class="maru">前職では新規売上を年間三、二〇〇万円伸ばした実績があり</span>、初年度から同水準の貢献ができると考えています。</div>
+      <div class="aka">良い。感情でなく数字で返せている</div>
+    </div>
+    <div class="line me">
+      <div class="who">あなた</div>
+      <div class="say">その価値を踏まえ、<span class="ok">五三〇万円でご検討いただけないでしょうか。</span></div>
+      <div class="aka a2">満額でなく歩み寄り額を示したのが上手い</div>
+    </div>
+    <div class="line">
+      <div class="who">人事部長</div>
+      <div class="say">……なるほど。一度、社内で持ち帰らせてください。</div>
+    </div>
+    <div class="stamp"><b>二段</b><span>交渉道場認定</span></div>
+  </div>
+</section>
+
+<section class="ranks">
+  <h2>相手は三人。帯の色が、覚悟の色。</h2>
+  <p class="note">白帯から順に稽古を積み、黒帯を落とせたら本番はもう怖くありません。</p>
+  <div class="obi-row">
+    <div class="obi b1">
+      <div class="belt"></div>
+      <h3>白帯<span>ものわかりの良い人事</span></h3>
+      <p>まずは希望額を自分の口で言い切る稽古から。言い出す間合いを体に覚えさせます。</p>
+    </div>
+    <div class="obi b2">
+      <div class="belt"></div>
+      <h3>茶帯<span>慎重な人事部長</span></h3>
+      <p>「一度持ち帰ります」で流そうとする相手に、根拠を添えて食い下がる稽古。</p>
+    </div>
+    <div class="obi b3">
+      <div class="belt"></div>
+      <h3>黒帯<span>予算を守り抜くCFO</span></h3>
+      <p>一歩も引かない最強の相手。条件全体を組み替えて着地させる、実戦最終試験。</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="cta">
+  <div class="cta-in">
+    <div>
+      <h2>稽古の成果は、<br><b>本番の年収</b>で受け取る。</h2>
+      <p>AVACAREERに登録すると、道場での稽古記録と評価をもとに、AIアバターが企業への条件交渉を代行します。あなたが磨いた一手を、そのまま内定条件へ。</p>
+    </div>
+    <div class="cta-act">
+      <a href="/register/">無料登録して本番に進む</a>
+      <small>登録は六十秒<br>稽古記録と段位は自動で引き継がれます</small>
+    </div>
+  </div>
+</section>
+<footer>© NexusAdvisors Inc. — AVACAREER LAB 交渉道場</footer>
+</body>
+</html>
