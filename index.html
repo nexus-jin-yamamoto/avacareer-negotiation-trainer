@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-XXXXXXXXXX');
+gtag('set', { tool_name: 'negotiation-trainer' });
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>交渉道場｜給与交渉は、稽古で上手くなる。</title>
@@ -233,5 +242,28 @@
   </div>
 </section>
 <footer>© NexusAdvisors Inc. — AVACAREER LAB 交渉道場</footer>
+<!-- LINE CTA tracking + UTM forwarding -->
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  document.querySelectorAll('a[href*="lin.ee"]').forEach(function(el){
+    el.addEventListener('click', function(){
+      gtag('event', 'line_cta_click', {
+        tool_name: 'negotiation-trainer',
+        event_category: 'conversion',
+        event_label: el.textContent.trim()
+      });
+    });
+  });
+  var params = new URLSearchParams(window.location.search);
+  var utms = ['utm_source','utm_medium','utm_campaign','utm_term','utm_content'];
+  var q = [];
+  utms.forEach(function(k){ if(params.get(k)) q.push(k+'='+encodeURIComponent(params.get(k))); });
+  if(q.length){
+    document.querySelectorAll('a[href*="lin.ee"]').forEach(function(el){
+      el.href += (el.href.includes('?') ? '&' : '?') + q.join('&');
+    });
+  }
+});
+</script>
 </body>
 </html>
